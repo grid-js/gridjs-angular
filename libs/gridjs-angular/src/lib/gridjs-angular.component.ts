@@ -14,7 +14,7 @@ import type { GridEvents } from 'gridjs/dist/src/events';
 import type Header from 'gridjs/dist/src/header';
 import type { Language, Translator } from 'gridjs/dist/src/i18n/language';
 import type Pipeline from 'gridjs/dist/src/pipeline/pipeline';
-import type { PluginManager } from 'gridjs/dist/src/plugin';
+import type { Plugin, PluginManager } from 'gridjs/dist/src/plugin';
 import type { ServerStorageOptions } from 'gridjs/dist/src/storage/server';
 import type Storage from 'gridjs/dist/src/storage/storage';
 import type Tabular from 'gridjs/dist/src/tabular';
@@ -38,13 +38,12 @@ import {
 })
 export class GridJsAngularComponent
   implements AfterViewInit, OnChanges, OnDestroy, GridJsConfig {
-  private nativeElement: any;
+  private nativeElement: HTMLElement;
   private gridInstance: Grid;
   private initialized: boolean;
-  private destroyed: boolean;
   private listeners: Map<string, (...args: any[]) => void> = new Map();
   @Input() gridConfig: Partial<UserConfig>;
-
+  @Input() plugins: Plugin[] = [];
   // TODO: auto generate Inputs/Output to easily sync with grid-js main package
   // props
   @Input() eventEmitter: GridJsEventEmitter<GridEvents>;
@@ -80,26 +79,34 @@ export class GridJsAngularComponent
   }
 
   ngAfterViewInit(): void {
-    this.gridInstance = new Grid(this.getFullConfig());
+    this.gridInstance = new Grid(this.getConfig(this.gridConfig));
+    this.registerPlugins();
     this.registerEvents();
     this.gridInstance.render(this.nativeElement);
     this.initialized = true;
   }
 
-  public ngOnChanges(changes: any): void {
+  ngOnChanges(changes: any): void {
     if (this.initialized) {
-      this.gridInstance.updateConfig(this.getFullConfig()).forceRender();
+      this.updateConfig(this.gridConfig);
     }
   }
 
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     if (this.initialized) {
-      this.destroyed = true;
       if (this.gridInstance) {
         this.unregisterEvents();
-        // this.gridInstance.destroy()
+        this.gridInstance = null;
       }
     }
+  }
+  // public api to interact with grid instance
+  getGridInstance() {
+    return this.gridInstance;
+  }
+
+  updateConfig(config: Partial<UserConfig>) {
+    this.gridInstance.updateConfig(this.getConfig(config)).forceRender();
   }
 
   private registerEvents() {
@@ -122,13 +129,21 @@ export class GridJsAngularComponent
     }
   }
 
-  private getFullConfig(): UserConfig {
-    const newConfig = { ...this.gridConfig };
+  private registerPlugins() {
+    for (const plugin of this.plugins) {
+      if (!this.gridInstance.plugin.get(plugin.id)) {
+        this.gridInstance.plugin.add(plugin);
+      }
+    }
+  }
+  private getConfig(config: Partial<UserConfig>): UserConfig {
+    const newConfig = { ...config };
     for (const [key, value] of Object.entries(this)) {
       if (GRIDJS_PROPS.includes(key as any)) {
         newConfig[key] = value;
       }
     }
+    this.gridConfig = newConfig;
     return newConfig;
   }
 }

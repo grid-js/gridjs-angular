@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { html } from 'gridjs';
+import { h, html, PluginPosition } from 'gridjs';
 import { GridJsAngularComponent } from './gridjs-angular.component';
 import { GridJsAngularModule } from './gridjs-angular.module';
 
@@ -76,4 +76,26 @@ export const events = () => ({
     declarations: [GridJsEventsExample],
   },
   component: GridJsEventsExample,
+});
+
+export const plugins = () => ({
+  component: GridJsAngularComponent,
+  props: {
+    sort: true,
+    columns: ['Name', 'Email', 'Phone Number'],
+    plugins: [
+      {
+        id: 'myplugin',
+        component: h(() => h('h1', {}, 'Hello world!'), {}),
+        position: PluginPosition.Header,
+      },
+    ],
+    data: [
+      ['John', 'john@example.com', '(353) 01 222 3333'],
+      ['Mark', 'mark@gmail.com', '(01) 22 888 4444'],
+      ['Eoin', 'eoin@gmail.com', '0097 22 654 00033'],
+      ['Sarah', 'sarahcdd@gmail.com', '+322 876 1233'],
+      ['Afshin', 'afshin@mail.com', '(353) 22 87 8356'],
+    ],
+  },
 });
