@@ -68,6 +68,15 @@ class ExampleComponent {
 }
 ```
 
+Finally don't forget to add gridjs theme in your index.html
+
+```html
+<link
+  href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
+  rel="stylesheet"
+/>
+```
+
 ## Inputs
 
 - You can pass all Grid.js configs to the `<gridjs-angular>` component as inputs. See [Grid.js Config](https://gridjs.io/docs/config) for more details.
