@@ -1,6 +1,6 @@
 {
   "name": "gridjs-angular",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "keywords": [
     "gridjs",
     "table",
@@ -11,7 +11,7 @@
   ],
   "author": "Salama Ashoush <salamaashoush@gmail.com>",
   "homepage": "https://gridjs.io",
-  "repository": "https://github.com/salamaashoush/gridjs-angular",
+  "repository": "https://github.com/grid-js/gridjs-angular",
   "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^9.0.0 || ^10.0.0",
