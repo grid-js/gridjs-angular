@@ -57,7 +57,7 @@
     "prettier": "2.0.4",
     "@nrwl/nx-cloud": "latest",
     "@angular/compiler-cli": "^10.1.0",
-    "@angular/language-service": "^10.1.0",
+    "@angular/language-service": "^11.0.9",
     "@angular-devkit/build-angular": "~0.1001.0",
     "codelyzer": "~5.0.1",
     "jest-preset-angular": "8.2.1",
