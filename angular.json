@@ -11,7 +11,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/gridjs-angular/tsconfig.lib.json",
-            "project": "libs/gridjs-angular/ng-package.json"
+            "project": "libs/gridjs-angular/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           },
           "configurations": {
             "production": {
@@ -39,7 +40,10 @@
             "tsConfig": "libs/gridjs-angular/tsconfig.spec.json",
             "passWithNoTests": true,
             "setupFile": "libs/gridjs-angular/src/test-setup.ts"
-          }
+          },
+          "outputs": [
+            "coverage/libs/gridjs-angular"
+          ]
         },
         "storybook": {
           "builder": "@nrwl/storybook:storybook",
@@ -69,7 +73,10 @@
             "ci": {
               "quiet": true
             }
-          }
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       },
       "schematics": {
