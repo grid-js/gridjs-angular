@@ -34,7 +34,7 @@ export const primary = () => ({
 
 @Component({
   template: `<gridjs-angular
-    [gridConfig]="gridConfig"
+    [config]="config"
     (cellClick)="handleCellClick($event)"
     (rowClick)="handleRowClick($event)"
     (beforeLoad)="handleBeforeLoad($event)"
@@ -42,7 +42,7 @@ export const primary = () => ({
   ></gridjs-angular>`,
 })
 class GridJsEventsExample {
-  gridConfig = {
+  config = {
     columns: ['Name', 'Email', 'Phone Number'],
     data: [
       ['John', 'john@example.com', '(353) 01 222 3333'],

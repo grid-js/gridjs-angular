@@ -10,85 +10,68 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { Grid, UserConfig } from 'gridjs';
-import type { GridEvents } from 'gridjs/dist/src/events';
-import type Header from 'gridjs/dist/src/header';
-import type { Language, Translator } from 'gridjs/dist/src/i18n/language';
-import type Pipeline from 'gridjs/dist/src/pipeline/pipeline';
-import type { Plugin, PluginManager } from 'gridjs/dist/src/plugin';
-import type { ServerStorageOptions } from 'gridjs/dist/src/storage/server';
-import type Storage from 'gridjs/dist/src/storage/storage';
-import type Tabular from 'gridjs/dist/src/tabular';
-import type { OneDArray, TColumn } from 'gridjs/dist/src/types';
-import type Dispatcher from 'gridjs/dist/src/util/dispatcher';
-import type { EventEmitter as GridJsEventEmitter } from 'gridjs/dist/src/util/eventEmitter';
-import type { PaginationConfig } from 'gridjs/dist/src/view/plugin/pagination';
-import type { SearchConfig } from 'gridjs/dist/src/view/plugin/search/search';
-import type { GenericSortConfig } from 'gridjs/dist/src/view/plugin/sort/sort';
 import { GRIDJS_EVENTS, GRIDJS_PROPS } from './constants';
-import {
-  GridJsClassName,
-  GridJsConfig,
-  GridJsData,
-  GridJsStyles,
-} from './types';
+
+
 @Component({
   selector: 'gridjs-angular',
   template: '',
   encapsulation: ViewEncapsulation.None,
 })
 export class GridJsAngularComponent
-  implements AfterViewInit, OnChanges, OnDestroy, GridJsConfig {
+  implements AfterViewInit, OnChanges, OnDestroy,UserConfig {
   private nativeElement: HTMLElement;
   private gridInstance: Grid;
   private initialized: boolean;
   private listeners: Map<string, (...args: any[]) => void> = new Map();
-  @Input() gridConfig: Partial<UserConfig>;
-  @Input() plugins: Plugin[] = [];
+  @Input() config: UserConfig;
   // TODO: auto generate Inputs/Output to easily sync with grid-js main package
   // props
-  @Input() eventEmitter: GridJsEventEmitter<GridEvents>;
-  @Input() dispatcher: Dispatcher<any>;
-  @Input() plugin: PluginManager;
-  @Input() data?: GridJsData;
-  @Input() server?: ServerStorageOptions;
-  @Input() header?: Header;
-  @Input() from: HTMLElement;
-  @Input() storage: Storage<any>;
-  @Input() pipeline: Pipeline<Tabular>;
-  @Input() autoWidth: boolean;
-  @Input() width: string;
-  @Input() height: string;
-  @Input() translator: Translator;
-  @Input() style?: Partial<GridJsStyles>;
-  @Input() className?: Partial<GridJsClassName>;
-  @Input() fixedHeader: boolean;
-  @Input() columns: OneDArray<TColumn | string>;
-  @Input() search: SearchConfig | boolean;
-  @Input() pagination: PaginationConfig | boolean;
-  @Input() sort: GenericSortConfig | boolean;
-  @Input() language: Language;
+  @Input() plugins: UserConfig['plugins']= [];
+  @Input() eventEmitter:  UserConfig['eventEmitter'];
+  @Input() dispatcher:UserConfig['dispatcher'];
+  @Input() plugin: UserConfig['plugin'];
+  @Input() data: UserConfig['data'];
+  @Input() server: UserConfig['server'];
+  @Input() header: UserConfig['header'];
+  @Input() from: UserConfig['from'];
+  @Input() storage: UserConfig['storage'];
+  @Input() pipeline: UserConfig['pipeline'];
+  @Input() autoWidth: UserConfig['autoWidth'];
+  @Input() width: UserConfig['width'];
+  @Input() height: UserConfig['height'];
+  @Input() translator: UserConfig['translator'];
+  @Input() style: UserConfig['style'];
+  @Input() className: UserConfig['className'];
+  @Input() fixedHeader: UserConfig['fixedHeader'];
+  @Input() columns: UserConfig['columns'];
+  @Input() search: UserConfig['search'];
+  @Input() pagination:UserConfig['pagination'];
+  @Input() sort:UserConfig['sort'];
+  @Input() language: UserConfig['language'];
+
   // events
   @Output() beforeLoad: EventEmitter<void> = new EventEmitter(true);
   // renamed load event to avoid conflict with native load event
   @Output() gridLoad: EventEmitter<any> = new EventEmitter(true);
   @Output() cellClick: EventEmitter<any> = new EventEmitter(true);
   @Output() rowClick: EventEmitter<any> = new EventEmitter(true);
+  @Output() ready: EventEmitter<any> = new EventEmitter(true);
 
-  constructor(elementDef: ElementRef) {
-    this.nativeElement = elementDef.nativeElement;
+  constructor(private elementDef: ElementRef) {
+    this.nativeElement = this.elementDef.nativeElement;
   }
 
   ngAfterViewInit(): void {
-    this.gridInstance = new Grid(this.getConfig(this.gridConfig));
-    this.registerPlugins();
+    this.gridInstance = new Grid(this.getConfig(this.config));
     this.registerEvents();
     this.gridInstance.render(this.nativeElement);
     this.initialized = true;
   }
 
-  ngOnChanges(changes: any): void {
+  ngOnChanges(): void {
     if (this.initialized) {
-      this.updateConfig(this.gridConfig);
+      this.updateConfig(this.config);
     }
   }
 
@@ -129,13 +112,6 @@ export class GridJsAngularComponent
     }
   }
 
-  private registerPlugins() {
-    for (const plugin of this.plugins) {
-      if (!this.gridInstance.plugin.get(plugin.id)) {
-        this.gridInstance.plugin.add(plugin);
-      }
-    }
-  }
   private getConfig(config: Partial<UserConfig>): UserConfig {
     const newConfig = { ...config };
     for (const [key, value] of Object.entries(this)) {
@@ -143,7 +119,7 @@ export class GridJsAngularComponent
         newConfig[key] = value;
       }
     }
-    this.gridConfig = newConfig;
+    this.config = newConfig;
     return newConfig;
   }
 }

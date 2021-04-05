@@ -1,14 +1,15 @@
+import { UserConfig } from 'gridjs';
 import { GridEvents } from 'gridjs/dist/src/events';
-import { GridJsConfig } from './types';
 
 export const GRIDJS_EVENTS: (keyof GridEvents)[] = [
   'beforeLoad',
   'cellClick',
   'load',
   'rowClick',
+  'ready',
 ];
 
-export const GRIDJS_PROPS: (keyof GridJsConfig)[] = [
+export const GRIDJS_PROPS: (keyof UserConfig)[] = [
   'eventEmitter',
   'dispatcher',
   'plugin',
@@ -30,4 +31,5 @@ export const GRIDJS_PROPS: (keyof GridJsConfig)[] = [
   'pagination',
   'sort',
   'language',
+  'plugins',
 ];
