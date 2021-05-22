@@ -27,7 +27,7 @@ In your component template
 
 ```ts
 import { Component } from '@angular/core';
-import { GridJsConfig } from 'gridjs-angular';
+import { UserConfig } from 'gridjs';
 
 @Component({
   template: `
@@ -41,7 +41,7 @@ import { GridJsConfig } from 'gridjs-angular';
   `
 })
 class ExampleComponent {
-  public gridConfig: GridJsConfig = {
+  public gridConfig: UserConfig = {
     columns: ['Name', 'Email', 'Phone Number'],
     data: [
       ['John', 'john@example.com', '(353) 01 222 3333'],

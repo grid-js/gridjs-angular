@@ -12,14 +12,13 @@ import {
 import { Grid, UserConfig } from 'gridjs';
 import { GRIDJS_EVENTS, GRIDJS_PROPS } from './constants';
 
-
 @Component({
   selector: 'gridjs-angular',
   template: '',
   encapsulation: ViewEncapsulation.None,
 })
 export class GridJsAngularComponent
-  implements AfterViewInit, OnChanges, OnDestroy,UserConfig {
+  implements AfterViewInit, OnChanges, OnDestroy, UserConfig {
   private nativeElement: HTMLElement;
   private gridInstance: Grid;
   private initialized: boolean;
@@ -27,9 +26,9 @@ export class GridJsAngularComponent
   @Input() config: UserConfig;
   // TODO: auto generate Inputs/Output to easily sync with grid-js main package
   // props
-  @Input() plugins: UserConfig['plugins']= [];
-  @Input() eventEmitter:  UserConfig['eventEmitter'];
-  @Input() dispatcher:UserConfig['dispatcher'];
+  @Input() plugins: UserConfig['plugins'] = [];
+  @Input() eventEmitter: UserConfig['eventEmitter'];
+  @Input() dispatcher: UserConfig['dispatcher'];
   @Input() plugin: UserConfig['plugin'];
   @Input() data: UserConfig['data'];
   @Input() server: UserConfig['server'];
@@ -46,9 +45,10 @@ export class GridJsAngularComponent
   @Input() fixedHeader: UserConfig['fixedHeader'];
   @Input() columns: UserConfig['columns'];
   @Input() search: UserConfig['search'];
-  @Input() pagination:UserConfig['pagination'];
-  @Input() sort:UserConfig['sort'];
+  @Input() pagination: UserConfig['pagination'];
+  @Input() sort: UserConfig['sort'];
   @Input() language: UserConfig['language'];
+  @Input() resizable: UserConfig['resizable'];
 
   // events
   @Output() beforeLoad: EventEmitter<void> = new EventEmitter(true);
