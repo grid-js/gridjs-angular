@@ -1,0 +1,115 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@nrwl/cypress"
+    versions:
+    - 12.0.0
+    - 12.0.1
+    - 12.0.4
+    - 12.0.6
+    - 12.0.7
+  - dependency-name: "@angular/cli"
+    versions:
+    - 11.2.10
+    - 11.2.8
+    - 11.2.9
+  - dependency-name: "@angular/language-service"
+    versions:
+    - 11.1.1
+    - 11.1.2
+    - 11.2.0
+    - 11.2.1
+    - 11.2.10
+    - 11.2.11
+    - 11.2.2
+    - 11.2.3
+    - 11.2.4
+    - 11.2.5
+    - 11.2.6
+    - 11.2.7
+    - 11.2.8
+    - 11.2.9
+  - dependency-name: "@angular-devkit/build-angular"
+    versions:
+    - 0.1102.10
+    - 0.1102.8
+    - 0.1102.9
+  - dependency-name: "@storybook/angular"
+    versions:
+    - 6.2.3
+    - 6.2.4
+    - 6.2.5
+    - 6.2.7
+    - 6.2.8
+  - dependency-name: "@storybook/addon-knobs"
+    versions:
+    - 6.2.3
+    - 6.2.4
+    - 6.2.5
+    - 6.2.7
+    - 6.2.8
+  - dependency-name: "@typescript-eslint/parser"
+    versions:
+    - 4.21.0
+  - dependency-name: "@typescript-eslint/eslint-plugin"
+    versions:
+    - 4.21.0
+  - dependency-name: y18n
+    versions:
+    - 3.2.2
+  - dependency-name: rxjs
+    versions:
+    - 6.6.3
+    - 6.6.6
+    - 6.6.7
+  - dependency-name: eslint
+    versions:
+    - 7.18.0
+    - 7.19.0
+    - 7.20.0
+    - 7.21.0
+    - 7.22.0
+    - 7.23.0
+  - dependency-name: ts-jest
+    versions:
+    - 26.4.4
+    - 26.5.0
+    - 26.5.1
+    - 26.5.2
+    - 26.5.3
+    - 26.5.4
+  - dependency-name: gridjs
+    versions:
+    - 3.2.2
+    - 3.3.0
+    - 3.4.0
+  - dependency-name: node-notifier
+    versions:
+    - 8.0.1
+    - 8.0.2
+  - dependency-name: elliptic
+    versions:
+    - 6.5.4
+  - dependency-name: jest-preset-angular
+    versions:
+    - 8.3.2
+    - 8.4.0
+  - dependency-name: typescript
+    versions:
+    - 4.0.5
+    - 4.0.6
+    - 4.0.7
+  - dependency-name: ts-node
+    versions:
+    - 9.1.1
+  - dependency-name: "@angular-devkit/build-ng-packagr"
+    versions:
+    - 0.1002.0
+  - dependency-name: ng-packagr
+    versions:
+    - 10.1.2
