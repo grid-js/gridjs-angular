@@ -1,50 +1,19 @@
 import { Component } from '@angular/core';
-import { h, PluginPosition } from 'gridjs';
+import { RouterModule } from '@angular/router';
+import { GridJsAngularComponent } from 'gridjs-angular';
+import 'gridjs/dist/theme/mermaid.css';
 
 @Component({
-  selector: 'gridjs-root',
+  standalone: true,
+  imports: [GridJsAngularComponent, RouterModule],
+  selector: 'gridjs-angular-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
-  public config = {
-    sort: true,
-    columns: ['Name', 'Language', 'Released At', 'Artist'],
-    server: {
-      url: 'https://api.scryfall.com/cards/search?q=Inspiring',
-      then: (data) =>
-        data.data.map((card) => [
-          card.name,
-          card.lang,
-          card.released_at,
-          card.artist,
-        ]),
-    },
-    plugins: [
-      {
-        id: 'myplugin',
-        component: h(() => h('h1', {}, 'Hello world!'), {}),
-        position: PluginPosition.Header,
-      },
-    ],
-  };
-
-  handleCellClick(event: any) {
-    console.log('cellClicked', event);
-  }
-
-  handleRowClick(event: any) {
-    console.log('rowClicked', event);
-  }
-
-  handleBeforeLoad(event: any) {
-    console.log('beforeLoad', event);
-  }
-
-  handleGridLoad(event: any) {
-    console.log('load', event);
-  }
-  handleGridReady(event: any) {
-    console.log('ready', event);
-  }
+  columns = ['Name', 'Email', 'Phone Number'];
+  data = [
+    ['John', 'john@example.com', '(353) 01 222 3333'],
+    ['Mark', 'mark@gmail.com', '(01) 22 888 4444'],
+  ];
 }

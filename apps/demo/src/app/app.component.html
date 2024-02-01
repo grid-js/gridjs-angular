@@ -1,8 +1,2 @@
-<gridjs-angular
-  [config]="config"
-  (cellClick)="handleCellClick($event)"
-  (rowClick)="handleRowClick($event)"
-  (beforeLoad)="handleBeforeLoad($event)"
-  (gridLoad)="handleGridLoad($event)"
-  (ready)="handleGridReady($event)"
-></gridjs-angular>
+<router-outlet></router-outlet>
+<gridjs-angular [data]="data" [columns]="columns"></gridjs-angular>
