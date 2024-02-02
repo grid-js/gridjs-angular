@@ -1,5 +1,4 @@
 import ts from 'typescript';
-import { basename } from 'path';
 import { readFileSync, writeFileSync } from 'fs';
 import Mustache from 'mustache';
 import { camelCase, constantCase } from 'change-case';
@@ -98,23 +97,6 @@ function extractTypeInformation(sourceTypings) {
             members,
           };
         }
-        
-        // const symbol = checker.getSymbolAtLocation(node.name);
-        // if (!symbol) {
-        //   return;
-        // }
-
-        // const name = symbol.getName();
-        // const members = [...symbol.members.entries()]
-        //   .map((m) => ({ name: m[0], valueDeclaration: m[1].valueDeclaration }))
-        //   .filter(
-        //     (m) => m.valueDeclaration?.kind === ts.SyntaxKind.PropertySignature,
-        //   )
-        //   .map((m) => m.name);
-        // interfaces.push({
-        //   interfaceName: name,
-        //   members,
-        // });
       }
     });
   });
