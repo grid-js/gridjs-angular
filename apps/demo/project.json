@@ -16,7 +16,7 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/demo/tsconfig.app.json",
         "assets": ["apps/demo/src/favicon.ico", "apps/demo/src/assets"],
-        "styles": ["node_modules/gridjs/dist/theme/mermaid.min.css"],
+        "styles": ["apps/demo/src/styles.css"],
         "scripts": []
       },
       "configurations": {

@@ -2,9 +2,6 @@
 
 Angular wrapper for [Grid.js](https://github.com/grid-js/gridjs)
 
-[![gridjs-angular repository on GitHub](https://img.shields.io/badge/github-gridjs--angular-green?logo=github&link=https%3A%2F%2Fgithub.com%2Fgrid-js%2Fgridjs-angular)](https://github.com/grid-js/gridjs-angular)
-![GridJS peer Dependency Version](https://img.shields.io/npm/dependency-version/gridjs-angular/peer/gridjs)
-
 ## Install
 
 ```bash
@@ -30,7 +27,7 @@ In your component template
 
 ```ts
 import { Component } from '@angular/core';
-import { Config } from 'gridjs';
+import { UserConfig } from 'gridjs';
 
 @Component({
   template: `
@@ -44,7 +41,7 @@ import { Config } from 'gridjs';
   `
 })
 class ExampleComponent {
-  public gridConfig: Config = {
+  public gridConfig: UserConfig = {
     columns: ['Name', 'Email', 'Phone Number'],
     data: [
       ['John', 'john@example.com', '(353) 01 222 3333'],
@@ -73,10 +70,13 @@ class ExampleComponent {
 }
 ```
 
-Finally don't forget to add gridjs theme to your `angular.json` file, or import it some other way.
+Finally don't forget to add gridjs theme in your index.html
 
-```json
-styles: ["node_modules/gridjs/dist/theme/mermaid.min.css"]
+```html
+<link
+  href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
+  rel="stylesheet"
+/>
 ```
 
 ## Inputs
@@ -89,7 +89,7 @@ styles: ["node_modules/gridjs/dist/theme/mermaid.min.css"]
 
 ## Outputs
 
-- You can bind to all Grid.js events as outputs. Additionally, the `load` event can also be accessed via `gridLoad` (to avoid conflict with the native DOM `load` event). See [Grid.js Events](https://gridjs.io/docs/examples/event-handler)
+- You can pass all Grid.js events as outputs with a little difference `load` event renamed to `beforeLoad`. See [Grid.js Events](https://gridjs.io/docs/examples/event-handler)
 
 ### Can I Grid.js rendering helpers? Yes
 
@@ -114,19 +114,4 @@ styles: ["node_modules/gridjs/dist/theme/mermaid.min.css"]
   }
 ```
 
-### Can I use Angular template syntax in plugins, formatters, etc?
-
-Not currently.
-
-You can't use Angular template syntax in Grid.js plugins, formatters, etc. because they cannot be connected to Angular's change detection system. You can use `h` function or `html` function to create custom HTML for your grid.
-
-## Development
-
-The `gridjs-angular` repository is a monorepo that uses [Nx](https://nx.dev) and [pnpm](https://pnpm.io/).
-
-### Useful commands
-
-- `pnpm install` - Install all dependencies
-- `nx serve demo` - Run demo app
-- `nx migrate latest` - Update Nx to the latest version, and upgrade all packages from package.json to their latest version
-- `nx update-bindings gridjs-angular` - Update the input and output bindings from GridJS to the Angular component. This command should be run after updating the GridJS version.
+### Can I use Angular components in plugins, formatters, etc? Not yet
