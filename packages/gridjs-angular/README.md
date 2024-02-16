@@ -13,26 +13,16 @@ npm install gridjs gridjs-angular
 
 ## Usage
 
-In your module
-
-```ts
-import { GridjsAngularModule } from 'gridjs-angular';
-
-@NgModule({
-  imports: [CommonModule,GridjsAngularModule],
-  declarations: [...],
-  exports: [...],
-})
-export class AppModule {}
-```
-
 In your component template
 
 ```ts
 import { Component } from '@angular/core';
+import { GridjsAngularModule } from 'gridjs-angular';
 import { Config } from 'gridjs';
 
 @Component({
+  standalone: true,
+  imports: [GridJsAngularComponent],
   template: `
     <gridjs-angular
       [gridConfig]="gridConfig"
@@ -129,4 +119,3 @@ The `gridjs-angular` repository is a monorepo that uses [Nx](https://nx.dev) and
 - `pnpm install` - Install all dependencies
 - `nx serve demo` - Run demo app
 - `nx migrate latest` - Update Nx to the latest version, and upgrade all packages from package.json to their latest version
-- `nx update-bindings gridjs-angular` - Update the input and output bindings from GridJS to the Angular component. This command should be run after updating the GridJS version.
