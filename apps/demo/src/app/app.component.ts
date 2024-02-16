@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { GridJsAngularComponent } from 'gridjs-angular';
-import { faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker/locale/en';
 import { TData } from 'gridjs/dist/src/types';
 
 @Component({
