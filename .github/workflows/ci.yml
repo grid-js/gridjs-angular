@@ -26,10 +26,4 @@ jobs:
           node-version: 20
           cache: 'pnpm'
       - run: pnpm install
-      - uses: nrwl/nx-set-shas@v4
-
-      # Uncomment to enable task distribution. --stop-agents-after is optional, but allows idle agents to shut down once the "build" targets have been requested
-      # - run: npx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="build"
-
-      - run: npx nx-cloud record -- nx format:check
       - run: npx nx affected -t=lint,test,build
