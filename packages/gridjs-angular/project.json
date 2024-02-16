@@ -34,7 +34,9 @@
     },
     "update-bindings": {
       "executor": "nx:run-commands",
-      "outputs": ["{workspaceRoot}/packages/gridjs-angular/src/lib/gridjs-binding-base.ts"],
+      "outputs": [
+        "{workspaceRoot}/packages/gridjs-angular/src/lib/gridjs-binding-base.ts"
+      ],
       "options": {
         "command": "node scripts/update-bindings.mjs"
       }

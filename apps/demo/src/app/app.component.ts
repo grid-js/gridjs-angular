@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { GridJsAngularComponent } from 'gridjs-angular';
-import { faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker/locale/en';
 import { TData } from 'gridjs/dist/src/types';
 
 @Component({
@@ -28,11 +28,9 @@ export class AppComponent {
   onRowClick = (event: any) => console.log('Grid row clicked', event);
 
   columns = ['Name', 'Email', 'Phone Number'];
-  data: TData = new Array(20)
-    .fill(undefined)
-    .map(() => [
-      faker.person.fullName(),
-      faker.internet.email(),
-      faker.phone.number(),
-    ]);
+  data: TData = Array.from({ length: 100 }).map(() => [
+    faker.person.fullName(),
+    faker.internet.email(),
+    faker.phone.number(),
+  ]);
 }

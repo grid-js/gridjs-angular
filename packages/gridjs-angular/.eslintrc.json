@@ -39,5 +39,13 @@
         "@nx/dependency-checks": "error"
       }
     }
-  ]
+  ],
+  "rules": {
+    "@nx/dependency-checks": [
+      "error",
+      {
+        "ignoredDependencies": ["tslib"]
+      }
+    ]
+  }
 }
